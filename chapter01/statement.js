@@ -4,18 +4,8 @@ const invoices = require("./test/data/invoices.json");
 console.log(statement(invoices, plays));
 
 function statement(invoice, plays) {
-  let totalAmount = 0;
-  let volumeCredits = 0;
-  let result = `Statement for ${invoice.customer}\n`;
-  const format = new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
-    minimumFractionDigits: 2,
-  }).format;
-  for (let perf of invoice.perfomances) {
-    const play = plays[perf.playID];
+  function amountFor(perf, play) {
     let thisAmount = 0;
-
     switch (play.type) {
       case "tragedy":
         thisAmount = 40000;
@@ -33,6 +23,19 @@ function statement(invoice, plays) {
       default:
         throw new Error(`unknown type: ${play.type}`);
     }
+    return thisAmount;
+  }
+  let totalAmount = 0;
+  let volumeCredits = 0;
+  let result = `Statement for ${invoice.customer}\n`;
+  const format = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+    minimumFractionDigits: 2,
+  }).format;
+  for (let perf of invoice.perfomances) {
+    const play = plays[perf.playID];
+    let thisAmount = amountFor(perf, play);
 
     // ボリューム特典のポイントを加算
     volumeCredits += Math.max(perf.audience - 30, 0);
