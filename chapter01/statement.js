@@ -3,6 +3,10 @@ const invoices = require("./test/data/invoices.json");
 
 console.log(statement(invoices, plays));
 
+function playFor(aPerformance) {
+  return plays[aPerformance.playID];
+}
+
 function statement(invoice, plays) {
   function amountFor(aPerformance, play) {
     let result = 0;
@@ -34,7 +38,7 @@ function statement(invoice, plays) {
     minimumFractionDigits: 2,
   }).format;
   for (let perf of invoice.perfomances) {
-    const play = plays[perf.playID];
+    const play = playFor(perf);
     let thisAmount = amountFor(perf, play);
 
     // ボリューム特典のポイントを加算
