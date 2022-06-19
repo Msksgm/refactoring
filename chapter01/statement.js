@@ -1,14 +1,14 @@
 const plays = require("./test/data/plays.json");
 const invoices = require("./test/data/invoices.json");
 
-console.log(statement(invoices, plays));
+console.log(statement(invoices));
 
 function playFor(aPerformance) {
   return plays[aPerformance.playID];
 }
 
-function statement(invoice, plays) {
-  function amountFor(aPerformance, play) {
+function statement(invoice) {
+  function amountFor(aPerformance) {
     let result = 0;
     switch (playFor(aPerformance).type) {
       case "tragedy":
@@ -38,7 +38,7 @@ function statement(invoice, plays) {
     minimumFractionDigits: 2,
   }).format;
   for (let perf of invoice.perfomances) {
-    let thisAmount = amountFor(perf, playFor(perf));
+    let thisAmount = amountFor(perf);
 
     // ボリューム特典のポイントを加算
     volumeCredits += Math.max(perf.audience - 30, 0);
