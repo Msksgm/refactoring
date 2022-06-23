@@ -1,13 +1,13 @@
 const plays = require("./test/data/plays.json");
 const invoices = require("./test/data/invoices.json");
 
-console.log(statement(invoices));
+console.log(statement(invoices, plays));
 
-function statement(invoice) {
+function statement(invoice, plays) {
   let result = `Statement for ${invoice.customer}\n`;
   for (let perf of invoice.perfomances) {
     // 注文の内訳を出力
-    result += ` ${playFor(perf).name}:${usd(amountFor(perf))} (${
+    result += ` ${playFor(perf).name}: ${usd(amountFor(perf))} (${
       perf.audience
     } seats)\n`;
   }
