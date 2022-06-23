@@ -3,11 +3,18 @@ const invoices = require("./test/data/invoices.json");
 
 console.log(statement(invoices));
 
-function playFor(aPerformance) {
-  return plays[aPerformance.playID];
-}
-
 function statement(invoice) {
+  let result = `Statement for ${invoice.customer}\n`;
+  for (let perf of invoice.perfomances) {
+    // 注文の内訳を出力
+    result += ` ${playFor(perf).name}:${usd(amountFor(perf))} (${
+      perf.audience
+    } seats)\n`;
+  }
+  result += `Amount owed is ${usd(totalAmount())}\n`;
+  result += `You earned ${totalVolumeCredits()} credits\n`;
+  return result;
+
   function totalAmount() {
     let result = 0;
     for (let perf of invoice.perfomances) {
@@ -36,6 +43,9 @@ function statement(invoice) {
       result += Math.floor(aPerformance.audience / 5);
     return result;
   }
+  function playFor(aPerformance) {
+    return plays[aPerformance.playID];
+  }
   function amountFor(aPerformance) {
     let result = 0;
     switch (playFor(aPerformance).type) {
@@ -57,17 +67,6 @@ function statement(invoice) {
     }
     return result;
   }
-  let result = `Statement for ${invoice.customer}\n`;
-  for (let perf of invoice.perfomances) {
-    // 注文の内訳を出力
-    result += ` ${playFor(perf).name}:${usd(amountFor(perf))} (${
-      perf.audience
-    } seats)\n`;
-  }
-
-  result += `Amount owed is ${usd(totalAmount())}\n`;
-  result += `You earned ${totalVolumeCredits()} credits\n`;
-  return result;
 }
 
 module.exports = statement;
