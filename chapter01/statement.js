@@ -3,11 +3,12 @@ const invoice = require("./test/data/invoices.json");
 
 console.log(statement(invoice, plays));
 
-function statement() {
-  return renderPlainText(invoice, plays);
+function statement(invoice, plays) {
+  const statementData = {};
+  return renderPlainText(statementData, invoice, plays);
 }
 
-function renderPlainText(invoice, plays) {
+function renderPlainText(data, invoice, plays) {
   let result = `Statement for ${invoice.customer}\n`;
   for (let perf of invoice.perfomances) {
     // 注文の内訳を出力
