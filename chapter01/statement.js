@@ -4,8 +4,13 @@ const invoice = require("./test/data/invoices.json");
 function statement(invoice, plays) {
   const statementData = {};
   statementData.customer = invoice.customer;
-  statementData.perfomances = invoice.perfomances;
+  statementData.perfomances = invoice.perfomances.map(enrichPerformance);
   return renderPlainText(statementData, plays);
+
+  function enrichPerformance(aPerformance) {
+    const result = Object.assign({}, aPerformance);
+    return result;
+  }
 }
 
 function renderPlainText(data, plays) {
