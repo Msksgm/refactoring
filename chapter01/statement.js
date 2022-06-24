@@ -16,7 +16,6 @@ function renderPlainText(data) {
   result += "</table>\n";
   result += `<p>Amount owed is <em>${usd(data.totalAmount)}</em></p>\n`;
   result += `<p>You earned <em>${data.totalVolumeCredits}</em> credits</p>\n`;
-  console.log(result);
   return result;
 }
 
