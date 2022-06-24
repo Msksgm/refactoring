@@ -77,7 +77,7 @@ class PerformanceCalculator {
 function createPerformanceCalculator(aPerformcance, aPlay) {
   switch (aPlay.type) {
     case "tragedy":
-      return new TragedyCalculator(aPerformance, aPlay);
+      return new TragedyCalculator(aPerformcance, aPlay);
     case "comedy":
       return new ComedyCalculator(aPerformcance, aPlay);
     default:
