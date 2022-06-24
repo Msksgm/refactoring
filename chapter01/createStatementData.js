@@ -75,7 +75,18 @@ class PerformanceCalculator {
 }
 
 function createPerformanceCalculator(aPerformcance, aPlay) {
-  return new PerformanceCalculator(aPerformcance, aPlay);
+  switch (aPlay.type) {
+    case "tragedy":
+      return new TragedyCalculator(aPerformance, aPlay);
+    case "comedy":
+      return new ComedyCalculator(aPerformcance, aPlay);
+    default:
+      throw new Error(`未知の演劇の種類: ${aPlay.type}`);
+  }
 }
+
+class TragedyCalculator extends PerformanceCalculator {}
+
+class ComedyCalculator extends PerformanceCalculator {}
 
 module.exports = createStatementData;
