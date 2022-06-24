@@ -7,7 +7,7 @@ function createStatementData(invoice, plays) {
   return statementData;
 
   function enrichPerformance(aPerformance) {
-    const calculator = new PerformanceCalculator(
+    const calculator = createPerformanceCalculator(
       aPerformance,
       playFor(aPerformance)
     );
@@ -72,6 +72,10 @@ class PerformanceCalculator {
       result += Math.floor(this.performance.audience / 5);
     return result;
   }
+}
+
+function createPerformanceCalculator(aPerformcance, aPlay) {
+  return new PerformanceCalculator(aPerformcance, aPlay);
 }
 
 module.exports = createStatementData;
