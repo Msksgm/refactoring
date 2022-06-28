@@ -1,10 +1,9 @@
 const Province = require("../province");
-const assert = require("assert");
 
 describe("province", () => {
   it("shortfall", function () {
     const asia = new Province(sampleProvinceData());
-    assert.equal(asia.shortfall, 5);
+    expect(asia.shortfall).toBe(5);
   });
 });
 
