@@ -9,6 +9,12 @@ describe("province", () => {
     const asia = new Province(sampleProvinceData());
     expect(asia.profit).toBe(230);
   });
+  it("change production", function () {
+    const asia = new Province(sampleProvinceData());
+    asia.producers[0].production = 20;
+    expect(asia.shortfall).toBe(-6);
+    expect(asia.profit).toBe(292);
+  });
 });
 
 function sampleProvinceData() {
