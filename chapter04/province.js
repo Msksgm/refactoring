@@ -18,7 +18,7 @@ class Province {
   }
 
   get profit() {
-    return this._demand - this.totalProduction;
+    return this.demandValue - this.demandCost;
   }
 
   get demandCost() {
