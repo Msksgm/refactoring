@@ -30,6 +30,12 @@ describe("province", () => {
     expect(asia.shortfall).toBe(-26);
     expect(asia.profit).toBe(-10);
   });
+
+  it("empty estring demand", function () {
+    asia.demand = "";
+    expect(asia.shortfall).toBe(NaN);
+    expect(asia.profit).toBe(NaN);
+  });
 });
 
 describe("no producers", function () {
